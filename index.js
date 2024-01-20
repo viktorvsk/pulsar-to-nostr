@@ -79,6 +79,7 @@ try {
 
   try {
     currentMessageId = fs.readFileSync(MID_CACHE_PATH).toString();
+    console.log(`Starting with message ${currentMessageId}`)
   } catch (e) {
     if (!e.message.match(/^ENOENT/)) {
       console.log(e);
