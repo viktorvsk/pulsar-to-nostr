@@ -79,7 +79,7 @@ try {
 
   try {
     currentMessageId = fs.readFileSync(MID_CACHE_PATH).toString();
-    console.log(`Starting with message ${currentMessageId}`)
+    console.log(`Starting with message ${currentMessageId}`);
   } catch (e) {
     if (!e.message.match(/^ENOENT/)) {
       console.log(e);
@@ -99,7 +99,7 @@ try {
     if (command[0] === "OK") {
       const eventId = command[1];
       const isSuccess = command[2];
-      isSuccess ? events[eventId].res() : events[eventId].rej();
+      isSuccess ? events[eventId].res() : events[eventId].rej(command[3]);
     }
   });
 
@@ -111,7 +111,7 @@ try {
       topic: PULSAR_TOPIC,
       startMessageId: mid,
     })
-    .catch(console.error);
+    .catch(cleanupAndExit);
 
   timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
 
@@ -124,10 +124,10 @@ try {
     timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
     const payload = msg.getData().toString();
     const event = JSON.parse(payload);
-    
+
     const pr = new Promise((res, rej) => {
       events[event.id] = { res, rej };
-    }).catch(console.error);
+    });
 
     ws.send(JSON.stringify(["EVENT", event]));
     inProgress.push(pr);
