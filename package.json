@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pulsar-client": "^1.9.0",
+    "ws": "^8.16.0"
+  }
+}
