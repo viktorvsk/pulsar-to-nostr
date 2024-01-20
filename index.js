@@ -38,10 +38,10 @@ try {
 
   const cleanupAndExit = async (eventType) => {
     const exitMsg = eventType || "Exiting because of reader timeout";
-    console.log(exitMsg);
     if (exiting) {
       return;
     }
+    console.log(exitMsg);
     exiting = true;
     if (currentMessageId) {
       fs.writeFileSync(MID_CACHE_PATH, currentMessageId);
