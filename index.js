@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const Pulsar = require("pulsar-client");
 const WebSocket = require("ws");
 
-const MID_CACHE_PATH = "./mid.hex";
+const MID_CACHE_PATH = "./cache/mid.hex";
 const READ_TIMEOUT = parseInt(process.env.READ_TIMEOUT || 5000);
 const RELAY_URL = process.env.RELAY_URL || "wss://saltivka.org";
 const PULSAR_URL = process.env.PULSAR_URL || "pulsar://127.0.0.1:6650";
