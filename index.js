@@ -46,11 +46,11 @@ try {
     if (currentMessageId) {
       fs.writeFileSync(MID_CACHE_PATH, currentMessageId);
     }
-    // if (reader && reader.isConnected()) {
-    //   console.log("Closing reader");
-    //   await reader.close().catch(console.error);
-    //   console.log("Closed reader");
-    // }
+    if (reader && reader.isConnected()) {
+      console.log("Closing reader");
+      await reader.close().catch(console.error);
+      console.log("Closed reader");
+    }
     console.log("Closing client");
     await client?.close()?.catch(console.error);
     console.log("Closed client");
