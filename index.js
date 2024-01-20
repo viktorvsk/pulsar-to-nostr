@@ -127,7 +127,7 @@ try {
 
     const pr = new Promise((res, rej) => {
       events[event.id] = { res, rej };
-    });
+    }).catch(console.error);
 
     ws.send(JSON.stringify(["EVENT", event]));
     inProgress.push(pr);
