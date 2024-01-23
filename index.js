@@ -115,10 +115,11 @@ try {
 
   timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
 
-  while ((msg = await reader.readNext())) {
+  while (reader.hasNext()) {
     if (exiting) {
       break;
     }
+    const msg = await reader.readNext();
     const atStart = Date.now();
     clearTimeout(timeout);
     timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
