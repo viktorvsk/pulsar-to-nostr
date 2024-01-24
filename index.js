@@ -95,7 +95,7 @@ try {
 
   ws.on("message", (data) => {
     const command = JSON.parse(data);
-    console.log(data.toString())
+    console.log(data.toString());
 
     if (command[0] === "OK") {
       const eventId = command[1];
@@ -126,13 +126,16 @@ try {
     timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
     const payload = msg.getData().toString();
     const event = JSON.parse(payload);
-    console.log(payload.toString())
+    console.log(payload.toString());
 
     const pr = new Promise((res, rej) => {
       events[event.id] = { res, rej };
     }).catch(console.error);
 
-    ws.send(JSON.stringify(["EVENT", event]));
+    const sendPayload = JSON.stringify(["EVENT", event]);
+    console.log(sendPayload);
+
+    ws.send(sendPayload);
     inProgress.push(pr);
 
     if (inProgress.length === BATCH_SIZE) {
