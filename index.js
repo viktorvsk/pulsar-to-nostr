@@ -126,7 +126,7 @@ try {
     timeout = setTimeout(cleanupAndExit, READ_TIMEOUT);
     const payload = msg.getData().toString();
     const event = JSON.parse(payload);
-    console.log(payload.toString());
+    console.log(typeof event);
 
     const pr = new Promise((res, rej) => {
       events[event.id] = { res, rej };
